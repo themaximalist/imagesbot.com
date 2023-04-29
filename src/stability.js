@@ -29,32 +29,6 @@ async function generate(prompt_text, options = null) {
 
         const start = Date.now();
 
-        /*
-        stability = {
-            seed: 12345,
-            cfg_scale: 7,
-            clip_guidance_preset: 'FAST_BLUE',
-            sampler: 'K_EULER',
-            style_preset: 'photographic',
-            text_prompts: [
-                { text: 'a realistic red rose', weight: 1 },
-                // { text: 'vibrant colors', weight: 0.8 },
-                // { text: 'nature', weight: 0.7 },
-                { text: 'romantic', weight: 0.6 },
-                // { text: 'digital painting', weight: 0.5 },
-                { text: 'dark and moody', weight: -0.5 },
-                { text: 'grunge', weight: -0.6 },
-                { text: 'minimalistic', weight: -0.7 },
-                { text: 'cartoonish', weight: -0.8 }
-            ],
-            height: 512,
-            width: 512,
-            samples: 1,
-            steps: 50
-        }
-        */
-        console.log(stability);
-
         const response = await fetch(
             `${BASE_URL}/v1/generation/${options.model}/text-to-image`,
             {
