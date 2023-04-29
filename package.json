@@ -1,0 +1,23 @@
+{
+    "name": "imagesbot",
+    "version": "0.0.3",
+    "description": "Image Explorer",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "keywords": [
+        "image",
+        "explorer",
+        "ai",
+        "stablediffusion"
+    ],
+    "author": "The Maximalist",
+    "license": "MIT",
+    "dependencies": {
+        "debug": "^4.3.4",
+        "dotenv": "^16.0.3",
+        "node-fetch": "^2.6.9",
+        "uuid": "^9.0.0"
+    }
+}
