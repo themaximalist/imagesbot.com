@@ -5,6 +5,7 @@ const { bufferToFile } = require("./utils");
 const { evolveOptions } = require("./evolve");
 const ConceptAgent = require("./agents");
 
+/*
 async function generateConcept(input) {
     ConceptAgent([input]).then(text_prompts => {
         console.log(text_prompts);
@@ -20,12 +21,18 @@ async function generateConcept(input) {
         }
     });
 }
+*/
+
 async function main() {
     log("starting");
 
-    let prompt = "video game mood board about a survival game where you surive an emp attack and all the power goes out"
-    for (let i = 0; i < 5; i++) {
-        generateConcept(prompt);
+    while (true) {
+        const concept = await ConceptAgent("a red rose");
+        console.log(concept);
+
+        const buffer = await stability(null, { stability: concept });
+        let filepath = bufferToFile(buffer, true);
+        console.log(filepath);
     }
 }
 
