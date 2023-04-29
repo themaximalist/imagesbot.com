@@ -3,42 +3,30 @@ const log = require("debug")("imagesbot:index");
 const stability = require("./stability");
 const { bufferToFile } = require("./utils");
 const { evolveOptions } = require("./evolve");
+const ConceptAgent = require("./agents");
 
+async function generateConcept(input) {
+    ConceptAgent([input]).then(text_prompts => {
+        console.log(text_prompts);
+
+        for (let i = 0; i < 5; i++) {
+            let options = { seed: 55555, text_prompts };
+            options = evolveOptions(options);
+            console.log(options);
+            stability(null, { stability: options }).then(buffer => {
+                let filepath = bufferToFile(buffer, true);
+                console.log(filepath);
+            });
+        }
+    });
+}
 async function main() {
     log("starting");
 
-    while (true) {
-        let options = { seed: 55555 };
-        options = evolveOptions(options);
-        let buffer = await stability("a red rose", { stability: options });
-        let filepath = bufferToFile(buffer, true);
-        console.log(filepath);
-
-        options = evolveOptions(options);
-        buffer = await stability("a red rose", { stability: options });
-        filepath = bufferToFile(buffer, true);
-        console.log(filepath);
+    let prompt = "video game mood board about a survival game where you surive an emp attack and all the power goes out"
+    for (let i = 0; i < 5; i++) {
+        generateConcept(prompt);
     }
-    /*
-    const buffer = await stability("a red rose", { stability: options });
-    const filepath = bufferToFile(buffer, true);
-    console.log(filepath);
-    */
-    /*
-    const buffer = await stability("a red rose", { stability: { cfg_scale: 5, seed: 1 } });
-    const filepath = bufferToFile(buffer, true);
-    console.log(filepath);
-    */
-
-    /*
-    for (let cfg_scale = 5; cfg_scale <= 35; cfg_scale++) {
-        const buffer = await stability("a red rose", { stability: { cfg_scale, seed: 1 } });
-        const filepath = bufferToFile(buffer, true);
-        console.log(filepath);
-    }
-    */
 }
 
 main();
-
-// TODO: you want to do a broad search first on the best parameters, then do a more fine-grained tuning while combining new promtps
