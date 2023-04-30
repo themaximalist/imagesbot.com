@@ -6,8 +6,6 @@ const session = require("./middleware/session");
 const htmx = require("express-htmx");
 const app = express();
 
-const controllers = require("./controllers");
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -20,8 +18,7 @@ app.locals = {
 app.set("views", "src/views");
 app.set("view engine", "ejs");
 
-app.get("/results", controllers.home);
-app.get("/", controllers.home);
+require("./controllers")(app);
 
 app.start = async function () {
     const port = process.env.PORT || 3000;

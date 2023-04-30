@@ -1,4 +1,4 @@
-<%- include("partials/header") %>
+<%- include("partials/_header") %>
 <div
     class="h-screen flex flex-col justify-center items-center gap-3 bg-gray-50"
 >
@@ -8,14 +8,18 @@
         </h1>
         <h2 class="text-xl text-gray-700">AI Image Explorer</h2>
     </div>
-    <form class="flex flex-col items-center w-full">
+    <form
+        class="flex flex-col items-center w-full"
+        method="post"
+        action="/search"
+    >
         <input
             type="text"
-            name="search"
+            name="query"
             autofocus="true"
             placeholder="a purple flower"
             class="text-center w-full max-w-sm p-2 bg-white outline-gray-400 rounded-xl outline-1"
         />
     </form>
 </div>
-<%- include("partials/footer") %>
+<%- include("partials/_footer") %>
