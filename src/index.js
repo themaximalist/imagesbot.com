@@ -4,16 +4,30 @@ const stability = require("./stability");
 const { bufferToFile } = require("./utils");
 const ConceptAgent = require("./agents");
 
+// service
+// text prompt
+// style
+// seed
+
 async function main() {
     log("starting");
 
-    while (true) {
-        const concept = await ConceptAgent("a beautiful a-frame cabin in the woods illustration");
-        console.log(concept);
+    const prompt = process.argv.slice(2).join(" ");
+    if (!prompt) throw new Error("no prompt provided")
+    log(`prompt: ${prompt}`);
 
-        const buffer = await stability(null, { stability: concept });
-        let filepath = bufferToFile(buffer, true);
-        console.log(filepath);
+    for (let i = 0; i < 5; i++) {
+        try {
+            ConceptAgent(prompt).then(async (concept) => {
+                if (!concept) return;
+                console.log(concept);
+                const buffer = await stability(null, { stability: concept });
+                let filepath = bufferToFile(buffer, true);
+                console.log(filepath);
+            });
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
 
