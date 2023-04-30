@@ -15,8 +15,8 @@
 
 .spinner {
     display: inline-block;
-    width: 16px;
-    height: 16px;
+    width: 64px;
+    height: 64px;
     border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 50%;
     border-top-color: rgba(0, 0, 0, 0.7);

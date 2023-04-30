@@ -17,6 +17,10 @@ Concept.init({
         type: DataTypes.TEXT,
         allowNull: false
     },
+    style: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
 }, {
     sequelize,
 });
