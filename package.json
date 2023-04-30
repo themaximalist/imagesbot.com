@@ -1,7 +1,7 @@
 {
     "name": "imagesbot",
-    "version": "0.0.3",
-    "description": "Image Explorer",
+    "version": "0.0.4",
+    "description": "AI Image Explorer",
     "main": "src/index.js",
     "scripts": {
         "start": "node src/index.js"
