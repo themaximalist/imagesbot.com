@@ -1,0 +1,45 @@
+const { DataTypes, Model } = require("sequelize");
+
+const sequelize = require("../sequelize");
+const Concept = require("./concept");
+
+class Result extends Model {
+}
+
+Result.init({
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+    },
+    service: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    model: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    options: {
+        type: DataTypes.JSON,
+        defaultValue: {},
+        allowNull: false
+    },
+    image_url: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    favorite: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
+}, {
+    sequelize,
+});
+
+Result.belongsTo(Concept, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+Concept.hasMany(Result, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+
+module.exports = Result;
