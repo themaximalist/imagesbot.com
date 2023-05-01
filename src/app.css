@@ -3,13 +3,20 @@
 @tailwind utilities;
 
 #loading {
-    display: none;
+    opacity: 0;
 }
 .htmx-request #loading {
-    display: flex;
+    opacity: 1;
 }
 .htmx-request#loading {
-    display: flex;
+    opacity: 1;
+}
+
+.htmx-request #explicit-generate {
+    display: none;
+}
+.htmx-request#explicit-generate {
+    display: none;
 }
 
 #loading .loading-animation {

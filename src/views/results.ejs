@@ -18,21 +18,21 @@
         </div>
     </div>
     <div class="w-full lg:w-8/12">
-        <% let trigger = (results.length < 10 ? "load" : "none") %>
         <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" hx-ext="sse" sse-connect="/realtime/<%- search.id %>" sse-swap="result" hx-trigger="load" hx-swap="afterbegin">
-            <div id="loading" class="w-full h-full justify-center items-center order-[-1]">
-                <div class="loading-animation"></div>
+            <div id="generate-indicator" class="order-[-1]">
+                <a href="/" id="explicit-generate" class="w-full h-full justify-center items-center flex transition-all ease-in-out hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3.0" stroke="currentColor" class="w-24 h-24">
+                        <path stroke-linecap="miter" stroke-linejoin="miter" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                </a>
+                <div id="loading" class="flex w-full h-full justify-center items-center transition-all ease-in-out">
+                    <div class="loading-animation"></div>
+                </div>
             </div>
-            <div hx-post="/generate/<%- search.id %>" hx-trigger="sse:connected" hx-indicator="#loading" class="hidden"></div>
+            <div hx-post="/generate/<%- search.id %>" hx-trigger="sse:connected" hx-indicator="#generate-indicator" class="hidden"></div>
             <% results.forEach(function(result) { %>
             <%- include('partials/_result', { result: result }) %>
             <% }) %>
-
-            <!--
-            <a href="" class="bg-gray-50 flex justify-center items-center text-gray-600 hover:scale-105 transition-all">
-                <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            </a>
-            -->
         </div>
 
     </div>

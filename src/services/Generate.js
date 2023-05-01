@@ -1,6 +1,6 @@
 const log = require("debug")("imagesbot:services:generate");
 
-const { Concept } = require("../models");
+const { Concept, Search, Result } = require("../models");
 const CreateConcept = require("../services/CreateConcept");
 const CreateImage = require("../services/CreateImage");
 const { randomElement } = require("../utils");
@@ -8,6 +8,18 @@ const { randomElement } = require("../utils");
 // TODO: if favorites then create a new result based on that
 // TODO: new_concept can be set and force a new concept to generate
 module.exports = async function* (search_id, num = 2) {
+    const num_results = await Result.count({
+        include: [{
+            model: Concept,
+            required: true,
+            include: [{ model: Search, required: true, where: { id: search_id } }],
+        }]
+    });
+
+    if (num_results >= 5) {
+        return;
+    }
+
     for (let i = 0; i < num; i++) {
         const concepts = await Concept.findAll({ where: { SearchId: search_id } });
 

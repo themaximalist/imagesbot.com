@@ -10,6 +10,9 @@ module.exports = async function (req, res) {
             const html = await render(res.render.bind(res), "partials/_result", { result });
             trigger(search_id, html);
         }
+
+        //sleep
+        await new Promise(resolve => setTimeout(resolve, 1000));
     } catch (e) {
         console.log(e);
         res.status(500).send("Error");
