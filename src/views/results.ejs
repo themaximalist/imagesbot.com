@@ -1,5 +1,5 @@
 <%- include('partials/_header') %>
-<div class="min-h-screen flex flex-col lg:flex-row p-8 gap-4 relative">
+<div class="min-h-screen flex flex-col lg:flex-row p-8 gap-4 lg:gap-8 relative">
     <div class="w-full lg:w-4/12 flex flex-col">
         <div class="flex flex-col lg:sticky lg:top-4 gap-8 lg:gap-0">
             <a href="/" class="font-semibold">Images<span class="text-gray-700">Bot</span></a>
@@ -18,7 +18,8 @@
         </div>
     </div>
     <div class="w-full lg:w-8/12">
-        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" hx-post="/generate/<%- search.id %>" hx-trigger="load" hx-swap="afterbegin">
+        <% let trigger = (results.length < 10 ? "load" : "none") %>
+        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" hx-post="/generate/<%- search.id %>" hx-trigger="<%- trigger %>" hx-swap="afterbegin">
             <% results.forEach(function(result) { %>
             <%- include('partials/_result', { result: result }) %>
             <% }) %>
