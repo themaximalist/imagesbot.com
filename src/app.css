@@ -4,12 +4,15 @@
 
 #loading {
     opacity: 0;
+    display: none;
 }
 .htmx-request #loading {
     opacity: 1;
+    display: flex;
 }
 .htmx-request#loading {
     opacity: 1;
+    display: flex;
 }
 
 .htmx-request #explicit-generate {

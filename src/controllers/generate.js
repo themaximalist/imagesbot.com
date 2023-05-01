@@ -5,14 +5,19 @@ const { render } = require("../utils");
 module.exports = async function (req, res) {
     try {
         const search_id = req.params.search_id;
-        const stream = await Generate(search_id);
+        const explicit = req.query.explicit === "true";
+        const num = req.query.num ? parseInt(req.query.num) : 5;
+
+        const options = {
+            explicit,
+            num,
+        };
+
+        const stream = await Generate(search_id, options);
         for await (const result of stream) {
             const html = await render(res.render.bind(res), "partials/_result", { result });
             trigger(search_id, html);
         }
-
-        //sleep
-        await new Promise(resolve => setTimeout(resolve, 1000));
     } catch (e) {
         console.log(e);
         res.status(500).send("Error");
