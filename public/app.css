@@ -530,6 +530,14 @@ video {
   position: relative;
 }
 
+.order-1 {
+  order: 1;
+}
+
+.order-\[-1\] {
+  order: -1;
+}
+
 .line-clamp-3 {
   overflow: hidden;
   display: -webkit-box;
@@ -575,6 +583,10 @@ video {
 
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
 }
 
 .flex-col {
@@ -722,7 +734,7 @@ video {
   transition-duration: 150ms;
 }
 
-#concept-loading {
+#loading {
   display: none;
 }
 

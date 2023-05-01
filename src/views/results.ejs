@@ -20,7 +20,7 @@
     <div class="w-full lg:w-8/12">
         <% let trigger = (results.length < 10 ? "load" : "none") %>
         <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" hx-ext="sse" sse-connect="/realtime/<%- search.id %>" sse-swap="result" hx-trigger="load" hx-swap="afterbegin">
-            <div id="loading" class="w-full h-full hidden justify-center items-center">
+            <div id="loading" class="w-full h-full justify-center items-center order-[-1]">
                 <div class="loading-animation"></div>
             </div>
             <div hx-post="/generate/<%- search.id %>" hx-trigger="sse:connected" hx-indicator="#loading" class="hidden"></div>

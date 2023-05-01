@@ -40,10 +40,20 @@ function randomElement(arr) {
     return arr[randomIndex];
 }
 
+function render(renderer, template, context = null) {
+    return new Promise((resolve, reject) => {
+        renderer(template, context, (err, html) => {
+            if (err) reject(err)
+            else resolve(html.replace("\n", ""));
+        });
+    });
+}
+
 module.exports = {
     bufferToFile,
     bufferToURL,
     openFile,
     shuffle,
     randomElement,
+    render,
 };
