@@ -1,9 +1,8 @@
-const ConceptAgent = require("../agents/ConceptAgent");
+const ConceptAgent = require("./ConceptAgent");
 const { Search, Concept } = require("../models");
 
-module.exports = async function (req, res) {
+module.exports = async function CreateConcept(search_id) {
     try {
-        const { search_id } = req.params;
         if (!search_id) throw new Error('No search_id provided');
 
         const search = await Search.findByPk(search_id);
@@ -19,9 +18,9 @@ module.exports = async function (req, res) {
 
         if (!created) throw new Error('No concept created');
 
-        res.render("partials/_concept", { concept: created.dataValues });
+        return created;
     } catch (e) {
         console.log(e);
-        res.status(500).send("Error");
+        return null;
     }
 }

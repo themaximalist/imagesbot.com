@@ -1,16 +1,14 @@
-const { Search, Concept, Result } = require("../models");
 const AI = require("@themaximalist/ai.js");
+
+const { Search, Concept, Result } = require("../models");
 const { bufferToURL } = require("../utils");
 
-module.exports = async function (req, res) {
+module.exports = async function CreateImage(concept_id) {
     try {
-        const { concept_id } = req.params;
         if (!concept_id) throw new Error('No concept_id provided');
 
         const concept = await Concept.findByPk(concept_id, { include: Search });
         if (!concept) throw new Error('No concept found');
-
-        if (concept.Search.session_id !== req.session) throw new Error('session mismatch');
 
         const options = {
             service: "stability",
@@ -33,9 +31,9 @@ module.exports = async function (req, res) {
         });
         if (!result) throw new Error('No result created');
 
-        res.render("partials/_result", { result: result.dataValues });
+        return result;
     } catch (e) {
         console.log(e);
-        res.status(500).send("Error");
+        return null;
     }
 }

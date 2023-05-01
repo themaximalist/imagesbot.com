@@ -7,63 +7,27 @@
                 <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl"><%- search.query %></h1>
                 <div class="">
                     <div class="grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 grid md:inline-grid gap-4">
+                        <!--
                         <a href="" class="w-full md:w-32 aspect-square bg-gray-50 flex justify-center items-center text-gray-600 hover:scale-110 transition-all">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                            </svg>
+                            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
                         </a>
-                        <a href="" class="w-full md:w-32 aspect-square bg-gray-50 flex justify-center items-center text-gray-600 hover:scale-110 transition-all">
-                            BOOM
-                        </a>
-                        <a href="" class="w-full md:w-32 aspect-square bg-gray-50 flex justify-center items-center text-gray-600 hover:scale-110 transition-all">
-                            BOOM
-                        </a>
-                        <a href="" class="w-full md:w-32 aspect-square bg-gray-50 flex justify-center items-center text-gray-600 hover:scale-110 transition-all">
-                            BOOM
-                        </a>
-                        <a href="" class="w-full md:w-32 aspect-square bg-gray-50 flex justify-center items-center text-gray-600 hover:scale-110 transition-all">
-                            BOOM
-                        </a>
+                        -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="w-full lg:w-8/12">
-        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" hx-post="/generate/<%- search.id %>" hx-trigger="load" hx-swap="afterbegin">
+            <% results.forEach(function(result) { %>
+            <%- include('partials/_result', { result: result }) %>
+            <% }) %>
+
+            <!--
             <a href="" class="bg-gray-50 flex justify-center items-center text-gray-600 hover:scale-105 transition-all">
                 <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
             </a>
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
-            <img src="/images/46c708a9-47e6-44d3-b64c-c5c3c9cb47b6.png" />
+            -->
         </div>
     </div>
 </div>
