@@ -5,28 +5,33 @@
 #concept-loading {
     display: none;
 }
-.htmx-request #concept-loading {
-    display: inline;
+.htmx-request #loading {
+    display: flex;
 }
-.htmx-request#concept-loading {
-    display: inline;
-}
-
-.spinner {
-    display: block;
-    width: 64px;
-    height: 64px;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    border-top-color: rgba(0, 0, 0, 0.7);
-    animation: spin 1s ease-in-out infinite;
+.htmx-request#loading {
+    display: flex;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
+#loading .loading-animation {
+    width: 60px;
+    aspect-ratio: 1;
+    transform-origin: center;
+    --c: no-repeat linear-gradient(#000 0 0);
+    background: var(--c) 0 0, var(--c) 0 100%, var(--c) 50% 50%, var(--c) 100% 0,
+        var(--c) 100% 100%;
+    animation: loader-animation 1s infinite alternate;
+}
+
+@keyframes loader-animation {
+    0%,
+    10% {
+        background-size: 20% 100%;
     }
+    50% {
+        background-size: 20% 20%;
+    }
+    90%,
     100% {
-        transform: rotate(360deg);
+        background-size: 100% 20%;
     }
 }

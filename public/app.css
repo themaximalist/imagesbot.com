@@ -545,8 +545,16 @@ video {
   display: grid;
 }
 
+.hidden {
+  display: none;
+}
+
 .aspect-square {
   aspect-ratio: 1 / 1;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .h-screen {
@@ -704,6 +712,10 @@ video {
   outline-color: #9ca3af;
 }
 
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
 .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -714,31 +726,37 @@ video {
   display: none;
 }
 
-.htmx-request #concept-loading {
-  display: inline;
+.htmx-request #loading {
+  display: flex;
 }
 
-.htmx-request#concept-loading {
-  display: inline;
+.htmx-request#loading {
+  display: flex;
 }
 
-.spinner {
-  display: block;
-  width: 64px;
-  height: 64px;
-  border: 2px solid rgba(0, 0, 0, 0.3);
-  border-radius: 50%;
-  border-top-color: rgba(0, 0, 0, 0.7);
-  animation: spin 1s ease-in-out infinite;
+#loading .loading-animation {
+  width: 60px;
+  aspect-ratio: 1;
+  transform-origin: center;
+  --c: no-repeat linear-gradient(#000 0 0);
+  background: var(--c) 0 0, var(--c) 0 100%, var(--c) 50% 50%, var(--c) 100% 0,
+        var(--c) 100% 100%;
+  animation: loader-animation 1s infinite alternate;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+@keyframes loader-animation {
+  0%,
+    10% {
+    background-size: 20% 100%;
   }
 
-  100% {
-    transform: rotate(360deg);
+  50% {
+    background-size: 20% 20%;
+  }
+
+  90%,
+    100% {
+    background-size: 100% 20%;
   }
 }
 
