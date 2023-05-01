@@ -2,19 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-.htmx-indicator {
+#concept-loading {
     display: none;
 }
-
-.htmx-request .htmx-indicator {
-    display: block;
+.htmx-request #concept-loading {
+    display: inline;
 }
-.htmx-request.htmx-indicator {
-    display: block;
+.htmx-request#concept-loading {
+    display: inline;
 }
 
 .spinner {
-    display: inline-block;
+    display: block;
     width: 64px;
     height: 64px;
     border: 2px solid rgba(0, 0, 0, 0.3);

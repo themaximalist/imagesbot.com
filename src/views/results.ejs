@@ -1,5 +1,6 @@
 <%- include('partials/_header') %>
 <script>
+    /*
     document.body.addEventListener("htmx:beforeRequest", function(event) {
         let target = event.target;
         if (target.tagName === "BUTTON") {
@@ -16,28 +17,31 @@
             target.innerHTML = target.dataset.originalContent;
         }
     });
+    */
 </script>
 
 <div class="p-8 flex flex-col gap-8">
     <h1 class="text-3xl font-medium text-center"><%- search.query %></h1>
 
     <div id="concepts" class="grid grid-cols-4 gap-4">
-
-        <button hx-post="/concept/<%- search.id %>/create" hx-swap="beforeend" hx-target="#concepts" class="flex justify-center items-center h-26">
-
+        <button hx-post="/concept/<%- search.id %>/create" hx-swap="beforeend" hx-target="#concepts" class="flex justify-center items-center h-26" hx-indicator="#concept-loading">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-20 h-20">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
-
-
-            <div class="htmx-indicator">Loading...</div>
         </button>
         <% concepts.forEach(function(concept) { %>
         <%- include('partials/_concept', { concept: concept }) %>
         <% }) %>
+        <div id="concept-loading">
+            LOADING
+        </div>
     </div>
 
-    <div><%= results %></div>
+    <div id="results" class="grid grid-cols-4 gap-4">
+        <% results.forEach(function(result) { %>
+        <%- include('partials/_result', { result: result }) %>
+        <% }) %>
+    </div>
 </div>
 
 <%- include('partials/_footer') %>

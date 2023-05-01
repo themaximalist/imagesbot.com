@@ -3,5 +3,6 @@ module.exports = function setup(app) {
     app.post("/search", require("./search"));
     app.get("/results/:search_id", require("./results"));
     app.post("/concept/:search_id/create/", require("./create_concept"));
+    app.post("/image/:concept_id/create/", require("./create_image"));
 };
 
