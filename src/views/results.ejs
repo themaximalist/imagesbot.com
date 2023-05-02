@@ -20,7 +20,7 @@
     <div class="w-full lg:w-8/12">
         <div id="results" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" hx-ext="sse" sse-connect="/realtime/<%- search.id %>" sse-swap="result" hx-trigger="load" hx-swap="afterbegin">
             <div id="generate-indicator" class="order-[-1]">
-                <a hx-post="/generate/<%- query.id %>?explicit=true&num=5" hx-indicator="#generate-indicator" hx-target="#results" hx-swap="afterbegin" id="explicit-generate" class="w-full h-full justify-center items-center flex transition-all ease-in-out hover:scale-110 cursor-pointer aspect-square">
+                <a hx-post="/generate/<%- query.id %>?explicit=true&num=10" hx-indicator="#generate-indicator" hx-target="#results" hx-swap="afterbegin" id="explicit-generate" class="w-full h-full justify-center items-center flex transition-all ease-in-out hover:scale-110 cursor-pointer aspect-square">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-24 h-24">
                         <path stroke-linecap="miter" stroke-linejoin="miter" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
