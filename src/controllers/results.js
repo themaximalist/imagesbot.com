@@ -8,9 +8,7 @@ module.exports = async function results(req, res) {
         const search = await Search.findByPk(search_id);
         if (!search) throw new Error('No search found');
 
-        const concepts = await search.getConcepts();
-
-        const results = await Result.findAll({
+        const allResults = await Result.findAll({
             include: [{
                 model: Concept,
                 required: true,
@@ -18,11 +16,14 @@ module.exports = async function results(req, res) {
             }],
             order: [
                 ['favorite', 'DESC'],
-                ['createdAt', 'DESC']
+                ['updatedAt', 'DESC']
             ]
         });
 
-        res.render("results", { search, concepts, results });
+        const favorites = allResults.filter(result => result.favorite);
+        const results = allResults.filter(result => !result.favorite);
+
+        res.render("results", { search, favorites, results });
     } catch (e) {
         res.status(500).send(e.message);
     }
