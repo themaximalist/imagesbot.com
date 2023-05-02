@@ -7,4 +7,5 @@ module.exports = function setup(app) {
     app.post("/generate/:query_id/", require("./generate"));
     app.post("/favorite/:result_id/", require("./favorite"));
     app.post("/unfavorite/:result_id/", require("./unfavorite"));
+    app.get("/status", require("./status"));
 };
