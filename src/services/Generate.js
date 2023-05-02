@@ -6,29 +6,43 @@ const CreateImage = require("../services/CreateImage");
 const { randomElement } = require("../utils");
 
 async function getOrCreateConcept(search_id) {
+    const favorites = await Concept.findAll({
+        where: { SearchId: search_id },
+        include: [{ model: Result, required: true, where: { favorite: true } }]
+    });
+
+    if (favorites.length > 0) {
+        const favoriteConcepts = Array.from(new Set(favorites.map(f => `${f.prompt} ${f.style}`)));
+        log(`generating new concept using ${favorites.length} favorite concepts for ${search_id}`);
+        return await CreateConcept(search_id, favoriteConcepts);
+    }
+
     const concepts = await Concept.findAll({ where: { SearchId: search_id } });
 
     if (concepts.length > 3) {
+        log(`using random concept for ${search_id}`);
         return randomElement(concepts);
     } else {
+        log(`creating a new concept for ${search_id}`);
         return await CreateConcept(search_id);
     }
 }
 
-async function createImage(concept) {
-    return await CreateImage(concept.id);
-}
-
 async function createResult(search_id) {
-    const concept = await getOrCreateConcept(search_id);
-    return await createImage(concept);
+    try {
+        const concept = await getOrCreateConcept(search_id);
+        if (!concept) throw new Error('No concept found');
+        return await CreateImage(concept.id);
+    } catch (e) {
+        console.log(e);
+        return null;
+    }
 }
 
-// TODO: if favorites then create a new result based on that
 module.exports = async function* (search_id, options = null) {
     if (!options) options = {};
-    if (!options.num) options.num = 5;
-    if (options.num > 5) options.num = 5;
+    if (!options.num) options.num = 10;
+    if (options.num > 10) options.num = 10;
     if (options.num < 1) options.num = 1;
 
     const num_results = await Result.count({
@@ -46,6 +60,7 @@ module.exports = async function* (search_id, options = null) {
 
     const results = [];
     for (let i = 0; i < options.num; i++) {
+        await new Promise(resolve => setTimeout(resolve, 1000 * Math.random())); // stagger a little bit
         results.push(createResult(search_id));
     }
 

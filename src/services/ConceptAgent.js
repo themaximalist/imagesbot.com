@@ -1,31 +1,75 @@
 const AI = require("@themaximalist/ai.js");
 
 module.exports = async function ConceptAgent(input) {
+    let input_prompt = "";
+    if (typeof input === "string") {
+        input_prompt = `\nHere's the INPUT: ${input}`;
+    } else if (Array.isArray(input)) {
+        input_prompt = `
+- Remix multiple INPUTS into a single concept
+- Figure out which core concepts are most important and keep those
+- Figure out which fringe concepts are least important and remove those
+- Add new styles and keywords to match the newly generated concept
+
+Here are the various INPUTs the user has provided: ${input.map(i => `\n- ${i}`)}
+        `;
+    }
+
+    // randomly remove some keywords and morph other keywords into similar words
+
     const prompt = `
-I am Concept Agent.
-I take INPUT from a user and convert it to the following JSON format using the RULES below.
+I am a Concept Agent.
+I transform user INPUT into a JSON format using the RULES provided below:
+
+# FORMAT
 {
     "style": "digital-art" // "3d-model", "analog-film", "anime", "cinematic", "comic-book", "digital-art", "enhance", "fantasy-art", "isometric", "line-art", "low-poly", "modeling-compound", "neon-punk", "origami", "photographic", "pixel-art", "tile-texture"
     "prompt": "keywords, go, here"
 }
 
 # RULES
-- I expand the text prompt into complex and artistic concepts
-- The artistic concepts should be verbose and dense keywords, separated by commas (CSV)
-- The keywords should include artist names, styles, eras, lighting, composition, colors, and other artistic concepts—go wild!
-- I will only generate one text_prompt concept
-- I will select an appropriate style from the list above based on the keywords
-- I will only use the style_preset list above
-- I will only output JSON that JSON.parse() could handle
+- Expand the text prompt into complex and artistic concepts. Be creative!
+- Artistic concepts should consist of verbose and dense keywords, separated by commas (CSV format).
+- Always use varied and unique keywords.
+- Keywords should include (but not limited to)
+ - Artist names
+ - Styles
+ - Eras
+ - Lighting
+ - Composition
+ - Colors
+ - Textures
+ - Mediums
+ - Techniques
+ - Subject matter
+ - Mood or emotion
+ - Perspective
+ - Movement
+ - Cultural influences
+ - Scale
+ - Materials
+ - Framing
+ - Geometric shapes
+ - Line quality
+ - Symbolism
+ - Space
+ - Time period
+ - Level of detail
+ - Artistic influences
+ - Artistic intent
+ - Presentation
+ - And other artistic concepts—be imaginative!
+- Generate only one text_prompt concept.
+- Select an appropriate style from the list above, based on the keywords.
+- Use only the styles listed above.
+- Output JSON that can be handled by JSON.parse().
+${input_prompt}
 
-The user will now enter their input and I will output the JSON.
+Here is the output JSON:
 `.trim();
 
-    const ai = new AI(null, { parser: AI.parseJSONFromText });
-    ai.system(prompt);
-    ai.user(`${input}\nPlease output the JSON now`);
     try {
-        const concept = await ai.send();
+        const concept = await AI(prompt, { parser: AI.parseJSONFromText });
         if (!concept.style) throw new Error('No style found');
         if (!concept.prompt) throw new Error('No prompt found');
 
