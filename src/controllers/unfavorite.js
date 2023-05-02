@@ -11,7 +11,7 @@ module.exports = async function (req, res) {
         const update = await Result.update({ favorite: false }, { where: { id: result_id } });
         if (!update) throw new Error("Error updating favorite");
 
-        res.render("partials/_favorite", { result });
+        res.render("partials/_result", { result });
     } catch (e) {
         res.status(500).send(`Error adding favorite: ${e.message}`);
     }

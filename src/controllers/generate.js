@@ -6,7 +6,7 @@ module.exports = async function (req, res) {
     try {
         const search_id = req.params.search_id;
         const explicit = req.query.explicit === "true";
-        const num = req.query.num ? parseInt(req.query.num) : 5;
+        const num = req.query.num ? parseInt(req.query.num) : 10;
 
         const options = {
             explicit,

@@ -45,3 +45,7 @@
         background-size: 100% 20%;
     }
 }
+
+#favorites:not(:has(a)) + #save-button {
+    display: none;
+}

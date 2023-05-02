@@ -15,8 +15,6 @@ Here are the various INPUTs the user has provided: ${input.map(i => `\n- ${i}`)}
         `;
     }
 
-    // randomly remove some keywords and morph other keywords into similar words
-
     const prompt = `
 I am a Concept Agent.
 I transform user INPUT into a JSON format using the RULES provided below:
