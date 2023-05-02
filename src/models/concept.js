@@ -1,7 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 
 const sequelize = require("../sequelize");
-const Search = require("./search");
+const Query = require("./query");
 
 class Concept extends Model {
 }
@@ -12,6 +12,10 @@ Concept.init({
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true
+    },
+    SearchId: {
+        type: DataTypes.UUID,
+        allowNull: false,
     },
     prompt: {
         type: DataTypes.TEXT,
@@ -25,7 +29,7 @@ Concept.init({
     sequelize,
 });
 
-Concept.belongsTo(Search, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
-Search.hasMany(Concept, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+Concept.belongsTo(Query, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+Query.hasMany(Concept, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
 
 module.exports = Concept;

@@ -1,4 +1,4 @@
-const Search = require("../models/search");
+const { Query, Search } = require('../models');
 
 module.exports = async function (req, res) {
     try {
@@ -7,10 +7,16 @@ module.exports = async function (req, res) {
 
         const search = await Search.create({
             session_id: req.session,
-            query
         });
 
-        res.redirect(`/results/${search.id}`);
+        if (!search) throw new Error('Error creating search');
+
+        const created = await Query.create({
+            SearchId: search.id,
+            query,
+        });
+
+        res.redirect(`/results/${created.id}`);
     } catch (e) {
         res.status(500).send(`Error searching ${e.message}`);
     }

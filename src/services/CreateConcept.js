@@ -1,17 +1,19 @@
 const ConceptAgent = require("./ConceptAgent");
-const { Search, Concept } = require("../models");
+const { Search, Concept, Query } = require("../models");
+const GetSearchByQueryId = require("./GetSearchByQueryId");
 
-module.exports = async function CreateConcept(search_id, query = null) {
+module.exports = async function CreateConcept(query_id, prompt = null) {
     try {
-        if (!search_id) throw new Error('No search_id provided');
+        const query = await Query.findByPk(query_id);
+        if (!query) throw new Error('No query found');
 
-        const search = await Search.findByPk(search_id);
-        if (!search) throw new Error('No search found');
+        const search = await GetSearchByQueryId(query.id);
 
-        if (!query) query = search.query;
-        const concept = await ConceptAgent(query);
+        if (!prompt) prompt = query.query;
+        const concept = await ConceptAgent(prompt);
 
         const created = await Concept.create({
+            QueryId: query.id,
             SearchId: search.id,
             prompt: concept.prompt,
             style: concept.style

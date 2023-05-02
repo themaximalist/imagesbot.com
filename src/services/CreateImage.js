@@ -1,13 +1,13 @@
 const AI = require("@themaximalist/ai.js");
 
-const { Search, Concept, Result } = require("../models");
+const { Concept, Result } = require("../models");
 const { bufferToURL } = require("../utils");
 
 module.exports = async function CreateImage(concept_id) {
     try {
         if (!concept_id) throw new Error('No concept_id provided');
 
-        const concept = await Concept.findByPk(concept_id, { include: Search });
+        const concept = await Concept.findByPk(concept_id);
         if (!concept) throw new Error('No concept found');
 
         const options = {
@@ -21,6 +21,8 @@ module.exports = async function CreateImage(concept_id) {
         const image_url = bufferToURL(buffer);
 
         const result = await Result.create({
+            SearchId: concept.SearchId,
+            QueryId: concept.QueryId,
             ConceptId: concept.id,
             service: options.service,
             model: options.model,

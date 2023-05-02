@@ -13,6 +13,14 @@ Result.init({
         allowNull: false,
         primaryKey: true
     },
+    SearchId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+    },
+    QueryId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+    },
     service: {
         type: DataTypes.STRING,
         allowNull: false

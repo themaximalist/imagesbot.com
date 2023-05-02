@@ -4,7 +4,7 @@
         <div class="flex flex-col lg:sticky lg:top-4 gap-8 lg:gap-0">
             <a href="/" class="font-semibold">Images<span class="text-gray-700">Bot</span></a>
             <div class="flex flex-col gap-8 lg:mt-40">
-                <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl flex"><%- search.query %></h1>
+                <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl flex"><%- query.query %></h1>
                 <div class="">
                     <div id="favorites" class="grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4 grid md:inline-grid gap-4">
                         <% favorites.forEach(function(result) { %>
@@ -20,7 +20,7 @@
     <div class="w-full lg:w-8/12">
         <div id="results" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" hx-ext="sse" sse-connect="/realtime/<%- search.id %>" sse-swap="result" hx-trigger="load" hx-swap="afterbegin">
             <div id="generate-indicator" class="order-[-1]">
-                <a hx-post="/generate/<%- search.id %>?explicit=true&num=5" hx-indicator="#generate-indicator" hx-target="#results" hx-swap="afterbegin" id="explicit-generate" class="w-full h-full justify-center items-center flex transition-all ease-in-out hover:scale-110 cursor-pointer aspect-square">
+                <a hx-post="/generate/<%- query.id %>?explicit=true&num=5" hx-indicator="#generate-indicator" hx-target="#results" hx-swap="afterbegin" id="explicit-generate" class="w-full h-full justify-center items-center flex transition-all ease-in-out hover:scale-110 cursor-pointer aspect-square">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-24 h-24">
                         <path stroke-linecap="miter" stroke-linejoin="miter" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
@@ -29,7 +29,7 @@
                     <div class="loading-animation"></div>
                 </div>
             </div>
-            <div hx-post="/generate/<%- search.id %>" hx-trigger="sse:connected" hx-indicator="#generate-indicator" class="hidden"></div>
+            <div hx-post="/generate/<%- query.id %>" hx-trigger="sse:connected" hx-indicator="#generate-indicator" class="hidden"></div>
             <% results.forEach(function(result) { %>
             <%- include('partials/_result', { result }) %>
             <% }) %>

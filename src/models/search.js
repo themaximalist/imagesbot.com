@@ -17,10 +17,6 @@ Search.init({
         allowNull: false,
         unique: false
     },
-    query: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
 }, {
     sequelize,
 });

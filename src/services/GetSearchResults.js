@@ -1,17 +1,19 @@
-const { Search, Result, Concept } = require("../models");
+const { Query, Search, Result } = require("../models");
 
-module.exports = async function GetSearchResults(search_id) {
-    if (!search_id) throw new Error('No search_id provided');
+module.exports = async function GetSearchResults(query_id) {
 
-    const search = await Search.findByPk(search_id);
-    if (!search) throw new Error('No search found');
+    const query = await Query.findByPk(query_id, {
+        include: [{
+            model: Search,
+        }]
+    });
+
+    if (!query) throw new Error('No query found');
+
+    const search = query.Search;
 
     const all = await Result.findAll({
-        include: [{
-            model: Concept,
-            required: true,
-            include: [{ model: Search, required: true, where: { id: search_id } }],
-        }],
+        where: { SearchId: search.id },
         order: [
             ['favorite', 'DESC'],
             ['updatedAt', 'DESC']
@@ -21,5 +23,5 @@ module.exports = async function GetSearchResults(search_id) {
     const favorites = all.filter(result => result.favorite);
     const results = all.filter(result => !result.favorite);
 
-    return { search, favorites, results };
+    return { search, query, favorites, results };
 }

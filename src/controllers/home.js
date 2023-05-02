@@ -24,5 +24,5 @@ const suggested = [
 ];
 
 module.exports = function (req, res) {
-    res.render("index", { placeholder: randomElement(suggested) });
+    res.render("home", { placeholder: randomElement(suggested) });
 }
