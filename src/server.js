@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(express.static(process.env.ASSET_DIR));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session);
 app.use(htmx.middleware);

@@ -1,10 +1,11 @@
 const uuid = require("uuid").v4;
 const { writeFileSync } = require("fs");
 const { exec } = require("child_process");
+const { join } = require("path");
 
 function bufferToFile(buffer, open = false) {
     const filename = `${uuid()}.png`;
-    const filepath = `./public/images/${filename}`;
+    const filepath = join(process.env.ASSET_DIR, "images", filename);
     writeFileSync(filepath, buffer);
     if (open) openFile(filepath);
     return filepath;
@@ -13,7 +14,7 @@ function bufferToFile(buffer, open = false) {
 function bufferToURL(buffer) {
     const filename = `${uuid()}.png`;
     const url = `/images/${filename}`;
-    const filepath = `./public/images/${filename}`;
+    const filepath = join(process.env.ASSET_DIR, "images", filename);
     writeFileSync(filepath, buffer);
     return url;
 }
@@ -21,7 +22,6 @@ function bufferToURL(buffer) {
 function openFile(filepath) {
     exec(`open ${filepath}`);
 }
-
 
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
