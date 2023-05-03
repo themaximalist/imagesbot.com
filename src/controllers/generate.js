@@ -6,7 +6,6 @@ const GetSearchByQueryId = require("../services/GetSearchByQueryId");
 module.exports = async function (req, res) {
     try {
         const query_id = req.params.query_id;
-        console.log("QUERY", query_id);
         const search = await GetSearchByQueryId(query_id);
         const explicit = req.query.explicit === "true";
         const num = req.query.num ? parseInt(req.query.num) : 10;

@@ -1,4 +1,3 @@
-const { Query, Search } = require("../models");
 const GetFavorites = require("../services/GetFavorites");
 
 module.exports = async function results(req, res) {
