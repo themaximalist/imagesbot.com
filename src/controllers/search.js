@@ -5,9 +5,15 @@ module.exports = async function (req, res) {
         const { query } = req.body;
         if (!query) throw new Error('No query provided');
 
-        const search = await Search.create({
-            session_id: req.session,
-        });
+        let search;
+        const search_id = req.body.search_id;
+        if (search_id) {
+            search = await Search.findByPk(search_id);
+        } else {
+            search = await Search.create({
+                session_id: req.session,
+            });
+        }
 
         if (!search) throw new Error('Error creating search');
 
