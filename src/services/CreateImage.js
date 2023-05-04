@@ -1,7 +1,7 @@
 const AI = require("@themaximalist/ai.js");
 
 const { Concept, Result } = require("../models");
-const { bufferToURL } = require("../utils");
+const { saveBufferToImage } = require("../utils");
 
 module.exports = async function CreateImage(concept_id, result_id) {
     try {
@@ -19,7 +19,8 @@ module.exports = async function CreateImage(concept_id, result_id) {
         };
 
         const buffer = await AI.Image(concept.prompt, options)
-        const image_url = bufferToURL(buffer);
+        const image_url = await saveBufferToImage(buffer);
+        const thumbnail_url = await saveBufferToImage(buffer, 200);
 
         const result = await Result.create({
             id: result_id,
@@ -29,6 +30,7 @@ module.exports = async function CreateImage(concept_id, result_id) {
             service: options.service,
             model: options.model,
             image_url,
+            thumbnail_url,
             options: {
                 seed: options.seed
             }

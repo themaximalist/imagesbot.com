@@ -1,21 +1,13 @@
 const uuid = require("uuid").v4;
-const { writeFileSync } = require("fs");
 const { exec } = require("child_process");
 const { join } = require("path");
+const sharp = require("sharp");
 
-function bufferToFile(buffer, open = false) {
-    const filename = `${uuid()}.png`;
-    const filepath = join(process.env.ASSET_DIR, "images", filename);
-    writeFileSync(filepath, buffer);
-    if (open) openFile(filepath);
-    return filepath;
-}
-
-function bufferToURL(buffer) {
-    const filename = `${uuid()}.png`;
+async function saveBufferToImage(buffer, size = 512) {
+    const filename = `${uuid()}-${size}x${size}.png`;
     const url = `/images/${filename}`;
     const filepath = join(process.env.ASSET_DIR, "images", filename);
-    writeFileSync(filepath, buffer);
+    await sharp(buffer).resize(size, size).png().toFile(filepath);
     return url;
 }
 
@@ -50,8 +42,7 @@ function render(renderer, template, context = null) {
 }
 
 module.exports = {
-    bufferToFile,
-    bufferToURL,
+    saveBufferToImage,
     openFile,
     shuffle,
     randomElement,

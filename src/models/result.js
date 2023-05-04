@@ -38,6 +38,10 @@ Result.init({
         type: DataTypes.TEXT,
         allowNull: false
     },
+    thumbnail_url: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
     favorite: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
