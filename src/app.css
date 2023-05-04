@@ -96,15 +96,3 @@
         transform: scaleX(5);
     }
 }
-
-/*
-textarea[disabled] {
-    pointer-events: none;
-}
-
-#search-query[disabled] {
-    border: 1px solid red;
-    pointer-events: all;
-}
-
-*/

@@ -3,7 +3,10 @@
     <a href="/" class="font-semibold absolute top-4">Images<span class="text-gray-700">Bot</span></a>
     <div class="max-w-5xl mx-auto flex flex-col gap-8 items-center">
         <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl flex"><%- search.Queries[0].query %></h1>
-        <div id="favorites" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <% let lgnum = (favorites.length > 5 ? 5 : favorites.length) %>
+        <% let mdnum = (favorites.length > 3 ? 3 : favorites.length) %>
+        <% let smnum = (favorites.length > 2 ? 2 : favorites.length) %>
+        <div id="favorites" class="grid-cols-<%= smnum  %> md:grid-cols-<%- mdnum %> lg:grid-cols-<%- lgnum %> gap-4 grid">
             <% favorites.forEach(function(result) { %>
             <a href="<%- result.image_url %>" target="_blank" class="w-full aspect-square bg-gray-50 flex justify-center items-center text-gray-600 hover:scale-110 transition-all cursor-pointer">
                 <img src="<%- result.image_url %>" />
