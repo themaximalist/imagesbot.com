@@ -1,5 +1,5 @@
 <%- include('partials/_header') %>
-<div class="min-h-screen flex flex-col lg:flex-row p-8 gap-4 lg:gap-8 relative">
+<div class="min-h-screen flex flex-col lg:flex-row p-8 gap-4 lg:gap-8 relative" id="blamo">
     <div class="w-full lg:w-4/12 flex flex-col">
         <div class="flex flex-col lg:sticky lg:top-4 gap-8 lg:gap-0">
             <a href="/" class="font-semibold">Images<span class="text-gray-700">Bot</span></a>
@@ -18,18 +18,16 @@
     </div>
 
     <div class="w-full lg:w-8/12">
-        <div id="results" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" hx-ext="sse" sse-connect="/realtime/<%- search.id %>" sse-swap="result" hx-trigger="load" hx-swap="afterbegin">
+        <div id="results" class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" hx-ext="sse" sse-connect="/realtime/<%- search.id %>" sse-swap="placeholder" hx-trigger="load" hx-swap="afterbegin">
+            <div class="hidden" sse-swap="concept"></div>
             <div id="generate-indicator" class="order-[-1]">
-                <a hx-post="/generate/<%- query.id %>?explicit=true&num=10" hx-indicator="#generate-indicator" hx-target="#results" hx-swap="afterbegin" id="explicit-generate" class="w-full h-full justify-center items-center flex transition-all ease-in-out hover:scale-110 cursor-pointer aspect-square">
+                <a hx-post="/generate/<%- query.id %>?explicit=true&num=1" hx-target="#results" hx-swap="afterbegin" id="explicit-generate" class="w-full h-full justify-center items-center flex transition-all ease-in-out hover:scale-110 click:scale-90 cursor-pointer aspect-square bg-gray-50" hx-indicator="none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-24 h-24">
                         <path stroke-linecap="miter" stroke-linejoin="miter" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                 </a>
-                <div id="loading" class="flex w-full h-full justify-center items-center transition-all ease-in-out aspect-square">
-                    <div class="loading-animation"></div>
-                </div>
             </div>
-            <div hx-post="/generate/<%- query.id %>" hx-trigger="sse:connected" hx-indicator="#generate-indicator" class="hidden"></div>
+            <div hx1-post="/1generate/<%- query.id %>" hx-trigger="sse:connected" class="hidden"></div>
             <% results.forEach(function(result) { %>
             <%- include('partials/_result', { result }) %>
             <% }) %>

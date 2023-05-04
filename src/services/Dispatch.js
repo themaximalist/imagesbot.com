@@ -7,7 +7,7 @@ function listen(route, callback) {
     listeners.push({ route, callback });
 }
 
-function trigger(route, data) {
+function trigger(route, event, data) {
     if (typeof data !== "string") throw new Error("data must be a string")
 
     const found = listeners.filter(l => l.route === route);
@@ -18,7 +18,7 @@ function trigger(route, data) {
 
     log(`triggering ${found.length} listeners for ${route}`);
     for (const listener of found) {
-        listener.callback(data);
+        listener.callback(event, data);
     }
 }
 

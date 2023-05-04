@@ -2,19 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#loading {
-    opacity: 0;
-    display: none;
-}
-.htmx-request #loading {
-    opacity: 1;
-    display: flex;
-}
-.htmx-request#loading {
-    opacity: 1;
-    display: flex;
-}
-
 .htmx-request #explicit-generate {
     display: none;
 }
@@ -22,30 +9,90 @@
     display: none;
 }
 
-#loading .loading-animation {
+.loading {
+    opacity: 0;
+    display: none;
+}
+.htmx-request .loading {
+    opacity: 1;
+    display: flex;
+}
+.htmx-request.loading {
+    opacity: 1;
+    display: flex;
+}
+
+#favorites:not(:has(a)) + #save-button {
+    display: none;
+}
+
+.loading-animation {
+    position: relative;
     width: 60px;
-    aspect-ratio: 1;
-    transform-origin: center;
-    --c: no-repeat linear-gradient(#000 0 0);
-    background: var(--c) 0 0, var(--c) 0 100%, var(--c) 50% 50%, var(--c) 100% 0,
-        var(--c) 100% 100%;
+    height: 60px;
+    overflow: hidden;
+}
+
+.bar {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #000;
     animation: loader-animation 1s infinite alternate;
+    will-change: transform;
+
+    @apply ease-in;
+}
+
+.bar:nth-child(1),
+.bar:nth-child(5) {
+    transform-origin: center left;
+}
+
+.bar:nth-child(2),
+.bar:nth-child(4) {
+    transform-origin: center right;
+}
+
+.bar:nth-child(3) {
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+}
+
+.bar:nth-child(2) {
+    top: 0;
+    right: 0;
+}
+
+.bar:nth-child(3) {
+    top: 50%;
+    left: 50%;
+    margin-top: -6px;
+    margin-left: -6px;
+    transform: translate(-50%, -50%);
+}
+
+.bar:nth-child(4) {
+    bottom: 0;
+    right: 0;
+}
+
+.bar:nth-child(5) {
+    bottom: 0;
+    left: 0;
 }
 
 @keyframes loader-animation {
     0%,
     10% {
-        background-size: 20% 100%;
+        transform: scaleY(5);
     }
     50% {
-        background-size: 20% 20%;
+        transform: scale(1);
     }
     90%,
     100% {
-        background-size: 100% 20%;
+        transform: scaleX(5);
     }
-}
-
-#favorites:not(:has(a)) + #save-button {
-    display: none;
 }
