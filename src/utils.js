@@ -44,7 +44,7 @@ function render(renderer, template, context = null) {
     return new Promise((resolve, reject) => {
         renderer(template, context, (err, html) => {
             if (err) reject(err)
-            else resolve(html.replaceAll("\n", ""));
+            else resolve(html.replace(/\n/g, ""));
         });
     });
 }
