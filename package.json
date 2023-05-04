@@ -6,6 +6,7 @@
     "scripts": {
         "start": "npm run server",
         "dev": "npm run watch",
+        "cachebust": "echo $(( $(cat public/cachebust.txt) + 1 )) > public/cachebust.txt",
         "server": "node src/index.js",
         "watch": "nf -j Procfile.dev start",
         "build": "npm run build:css",

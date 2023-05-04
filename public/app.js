@@ -11,6 +11,7 @@ function swapResult(data) {
     }
 
     result.outerHTML = html;
+    // Maybe inefficient to re-process all results but couldn't get process working with outerHTML
     htmx.process(document.getElementById("results"));
 }
 
@@ -33,16 +34,25 @@ function setupSearchSwap() {
     }
 }
 
-setupSearchSwap();
-
 document.body.addEventListener("htmx:sseMessage", function (evt) {
-    if (evt.detail.type == "placeholder") {
-        // console.log("SSE PLACEHOLDER");
-    } else if (evt.detail.type == "concept") {
+    if (evt.detail.type == "concept") {
         swapResult(evt.detail.data);
     } else if (evt.detail.type == "result") {
         swapResult(evt.detail.data);
-    } else {
-        console.log("OTHER", evt);
     }
 });
+
+function setupLiveToggle() {
+    const checkbox = document.getElementById("live-checkbox");
+    if (!checkbox) {
+        console.log("could not find live checkbox");
+        return;
+    }
+
+    document.body.addEventListener('htmx:configRequest', function (evt) {
+        evt.detail.parameters['live'] = checkbox.checked;
+    });
+}
+
+setupSearchSwap();
+setupLiveToggle();

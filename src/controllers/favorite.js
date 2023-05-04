@@ -6,17 +6,19 @@ module.exports = async function (req, res) {
         const { result_id } = req.params;
         const result = await Result.findByPk(result_id);
         if (!result) throw new Error("Result not found");
+        const live = JSON.parse(req.body.live);
 
         res.setHeader("HX-Trigger", "DeleteNode");
 
         const update = await Result.update({ favorite: true }, { where: { id: result_id } });
         if (!update) throw new Error("Error updating favorite");
 
-        RealtimeGenerate(res, result.QueryId, 3);
+        if (live) {
+            // GENERATE
+            RealtimeGenerate(res, result.QueryId, 3);
+        }
 
         res.render("partials/_favorite", { result });
-
-        // GENERATE
     } catch (e) {
         res.status(500).send(`Error adding favorite: ${e.message}`);
     }

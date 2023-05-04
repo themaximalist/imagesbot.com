@@ -1,5 +1,6 @@
 const log = require("debug")("imagesbot:server");
 
+const { readFileSync } = require("fs");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const session = require("./middleware/session");
@@ -15,6 +16,7 @@ app.use(session);
 app.use(htmx.middleware);
 app.locals = {
     NODE_ENV: process.env.NODE_ENV,
+    CACHE_BUST: readFileSync("./public/cachebust.txt").toString().trim()
 };
 app.set("views", "src/views");
 app.set("view engine", "ejs");
