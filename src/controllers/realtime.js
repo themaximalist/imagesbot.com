@@ -19,9 +19,18 @@ module.exports = async function (req, res) {
 
     log(`client ${req.session} connected to ${search_id} realtime results`);
 
-    res.on("close", () => {
+    function cleanup() {
         unlisten(search_id);
         res.end();
+    }
+
+    res.on("close", () => {
+        cleanup();
+    });
+
+    res.on("error", (e) => {
+        console.log("REALTIME ERROR", e)
+        cleanup();
     });
 
     listen(search_id, (event, data) => {
@@ -30,7 +39,7 @@ module.exports = async function (req, res) {
         } catch (e) {
             console.log(e);
             log(`listen error on ${search_id}`);
-            unlisten(search_id);
+            cleanup();
         }
     });
 
