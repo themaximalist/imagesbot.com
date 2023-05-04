@@ -1,4 +1,5 @@
 const { Result } = require("../models");
+const RealtimeGenerate = require("../services/RealtimeGenerate");
 
 module.exports = async function (req, res) {
     try {
@@ -11,7 +12,11 @@ module.exports = async function (req, res) {
         const update = await Result.update({ favorite: true }, { where: { id: result_id } });
         if (!update) throw new Error("Error updating favorite");
 
+        RealtimeGenerate(res, result.QueryId, 3);
+
         res.render("partials/_favorite", { result });
+
+        // GENERATE
     } catch (e) {
         res.status(500).send(`Error adding favorite: ${e.message}`);
     }
