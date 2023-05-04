@@ -25,7 +25,13 @@ module.exports = async function (req, res) {
     });
 
     listen(search_id, (event, data) => {
-        res.write(`event: ${event}\ndata: ${data}\n\n`);
+        try {
+            res.write(`event: ${event}\ndata: ${data}\n\n`);
+        } catch (e) {
+            console.log(e);
+            log(`listen error on ${search_id}`);
+            unlisten(search_id);
+        }
     });
 
     res.write(`event: connected\ndata: ${req.session}\n\n`);
