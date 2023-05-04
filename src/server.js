@@ -16,7 +16,9 @@ app.use(session);
 app.use(htmx.middleware);
 app.locals = {
     NODE_ENV: process.env.NODE_ENV,
-    CACHE_BUST: readFileSync("./public/cachebust.txt").toString().trim()
+    CACHE_BUST: readFileSync("./public/cachebust.txt").toString().trim(),
+    PAGE_TITLE: "ImagesBot — AI Image Explorer",
+    PAGE_DESCRIPTION: "ImagesBot is an AI-powered image agent that generates images based on your search terms.",
 };
 app.set("views", "src/views");
 app.set("view engine", "ejs");
