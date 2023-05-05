@@ -1,5 +1,16 @@
         <script src="/app.js?cb=<%= CACHE_BUST %>"></script>
         <script src="https://unpkg.com/htmx.org@1.9.2"></script>
         <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-92PXKCLLEY"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'G-92PXKCLLEY');
+        </script>
     </body>
 </html>
