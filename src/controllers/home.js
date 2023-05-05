@@ -1,4 +1,5 @@
 const { randomElement } = require("../utils");
+const RecentResults = require("../services/RecentResults");
 
 const suggested = [
     "Aurora Borealis",
@@ -23,6 +24,8 @@ const suggested = [
     "Drone Photography"
 ];
 
-module.exports = function (req, res) {
-    res.render("home", { placeholder: randomElement(suggested) });
+module.exports = async function (req, res) {
+    const placeholder = randomElement(suggested);
+    const recent = await RecentResults();
+    res.render("home", { placeholder, recent });
 }

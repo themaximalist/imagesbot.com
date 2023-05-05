@@ -54,5 +54,38 @@ function setupLiveToggle() {
     });
 }
 
+function setupRecentScroll() {
+    const container = document.getElementById('recent-results');
+    if (container) {
+        const width = container.scrollWidth;
+
+        let hovering = false;
+
+        container.onmouseenter = () => {
+            hovering = true;
+        };
+
+        container.onmouseleave = () => {
+            hovering = false;
+        };
+
+        window.addEventListener('load', () => {
+            self.setInterval(() => {
+                if (!hovering && container.scrollLeft !== width) {
+                    container.scrollTo(container.scrollLeft + 1, 0);
+                }
+            }, 150);
+        });
+    }
+}
+
+function searchRecent(prompt) {
+    const form = document.getElementById("search-form");
+    const search = document.getElementById("search");
+    search.value = prompt.slice(0, 254);
+    form.submit();
+}
+
 setupSearchSwap();
 setupLiveToggle();
+setupRecentScroll();
