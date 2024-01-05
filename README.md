@@ -38,12 +38,10 @@ ImagesBot is free to try at [imagesbot.com](https://imagesbot.com/), and is also
 git clone https://github.com/themaximal1st/imagesbot.com.git
 cd imagesbot.com
 npm install
-
+cp .env.template .env # edit .env
+npm run dev
+open http://localhost:3000
 ```
-
-
-
-
 
 
 
