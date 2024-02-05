@@ -23,5 +23,20 @@
             <% }) %>
         </div>
     </div>
+    <script>
+        const form = document.getElementById("search-form");
+        const query = document.getElementById("search");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            plausible("Search", {
+                props: {
+                    query: query.value
+                },
+                callback: function() {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 </div>
 <%- include("partials/_footer") %>
