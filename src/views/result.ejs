@@ -1,4 +1,4 @@
-<%- include("partials/_header") %>
+<%- include('partials/_header', { title: result.Concept.Query.query, description: `Image search results for '${result.Concept.Query.query}'`, image: `https://imagesbot.com${result.image_url}` }) %>
 
 <a href="/" class="flex flex-col items-center my-4">
     <img src="/imagesbot.png" alt="ImagesBot" class="w-16" />

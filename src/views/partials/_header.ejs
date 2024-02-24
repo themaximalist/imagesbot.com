@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html>
+<% 
+if (!locals.title) locals.title = PAGE_TITLE;
+if (!locals.description) locals.description = PAGE_DESCRIPTION;
+if (!locals.image) locals.image = "https://imagesbot.com/social.png";
+%>
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/app.css?cb=<%= CACHE_BUST %>" rel="stylesheet" />
-    <title><%- PAGE_TITLE %></title>
-    <meta name="description" content="<%- PAGE_DESCRIPTION %>" />
+    <title><%- locals.title %></title>
+    <meta name="description" content="<%- locals.description %>" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+
+    <meta property="og:url" content="https://imagesbot.com">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= locals.title %>">
+    <meta property="og:description" content="<%= locals.description %>">
+    <meta property="og:image" content="<%= locals.image %>">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="imagesbot.com">
+    <meta property="twitter:url" content="https://imagesbot.com">
+    <meta name="twitter:title" content="<%= locals.title %>">
+    <meta name="twitter:description" content="<%= locals.description %>">
+    <meta name="twitter:image" content="<%= locals.image %>">
 </head>
 
 <body>
