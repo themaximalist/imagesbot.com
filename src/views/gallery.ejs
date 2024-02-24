@@ -32,7 +32,7 @@
     <div class="flex gap-2 justify-center">
         <% for (let page = 1; page <= Math.ceil(count / limit); page++) { %>
         <% let off = (page - 1) * limit %>
-        <a href="/gallery?offset=<%= off %>&limit=<%= limit %>" class="<%= (offset == off ? "font-bold bg-gray-200 hover:bg-gray-300" : "bg-gray-50 hover:bg-gray-100") %> px-3 py-2 rounded-sm text-sm">
+        <a href="/gallery?offset=<%= off %>&limit=<%= limit %>&search=<%= encodeURIComponent(search) %>" class="<%= (offset == off ? "font-bold bg-gray-200 hover:bg-gray-300" : "bg-gray-50 hover:bg-gray-100") %> px-3 py-2 rounded-sm text-sm">
             <%= page %>
         </a>
         <% } %>
