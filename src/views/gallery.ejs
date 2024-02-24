@@ -1,0 +1,21 @@
+<%- include("partials/_header") %>
+
+<a href="/" class="flex flex-col items-center my-4">
+    <img src="/imagesbot.png" alt="ImagesBot" class="w-16" />
+    <h1 class="text-5xl font-medium tracking-wide">
+        Images<span class="text-gray-700">Bot</span>
+    </h1>
+    <h2 class="text-xl text-gray-700">Image Gallery</h2>
+</a>
+
+<div class="flex w-full mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-2">
+        <% for (const result of results) { %>
+        <a href="/result/<%- result.id %>">
+            <img src="<%= result.image_url %>" loading="lazy" alt="<%= result.Concept.prompt %>" />
+        </a>
+        <% } %>
+    </div>
+</div>
+
+<%- include("partials/_footer") %>

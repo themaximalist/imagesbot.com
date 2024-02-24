@@ -2,7 +2,7 @@
 <div class="h-screen flex flex-col justify-center items-center gap-4 from-white to-gray-100 bg-gradient-to-br">
     <div></div>
     <div class="flex flex-col gap-2 items-center">
-        <img src="/imagesbot.png" alt="ImagesBot" class="w-36" />
+        <img src="/imagesbot.png" alt="ImagesBot" class="w-28" />
         <h1 class="text-5xl font-medium tracking-wide">
             Images<span class="text-gray-700">Bot</span>
         </h1>
@@ -14,7 +14,7 @@
     <div class="relative w-full">
         <div class="flex gap-4 py-12 overflow-x-scroll w-full max-w-full scrolling-x-content" id="recent-results">
             <% recent.forEach(result => { %>
-            <a href="javascript:searchRecent('<%- result.Concept.Query.query %>')" class="max-w-[100px] lg:max-w-[200px] flex flex-col bg-gray-50 rounded-md shadow-sm hover:scale-110 cursor-pointer transition-all">
+            <a href="/results/<%- result.Concept.Query.id %>" class="max-w-[100px] lg:max-w-[200px] flex flex-col bg-gray-50 rounded-md shadow-sm hover:scale-110 cursor-pointer transition-all">
                 <img src="<%= result.thumbnail_url %>" class="w-full h-full aspect-square rounded-t-md" />
                 <span class="text-xs lg:text-base truncate p-2">
                     <%= result.Concept.prompt %>
@@ -22,6 +22,9 @@
             </a>
             <% }) %>
         </div>
+    </div>
+    <div class="flex gap-4">
+        <a href="/gallery">Gallery</a>
     </div>
     <script>
         const form = document.getElementById("search-form");

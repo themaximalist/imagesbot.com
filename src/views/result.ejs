@@ -1,0 +1,36 @@
+<%- include("partials/_header") %>
+
+<a href="/" class="flex flex-col items-center my-4">
+    <img src="/imagesbot.png" alt="ImagesBot" class="w-16" />
+    <h1 class="text-5xl font-medium tracking-wide">
+        Images<span class="text-gray-700">Bot</span>
+    </h1>
+</a>
+
+<div class="flex flex-col w-full max-w-lg mx-auto px-4 py-8">
+    <img src="<%= result.image_url %>" alt="<%= result.Concept.prompt %>" class="w-full" />
+    <div class="flex flex-col gap-1 my-4 bg-gray-50 rounded-sm p-2">
+        <a href="/results/<%= result.Concept.Query.id %>" class="font-medium text-xl">
+            <%= result.Concept.Query.query %>
+        </a>
+        <div>
+            <%= result.Concept.prompt %>
+        </div>
+    </div>
+
+    <a href="/gallery" class="text-gray-500 text-sm mb-2">← Back to gallery</a>
+</div>
+
+<div class="flex flex-col w-full mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
+        <% for (const r of related) { %>
+        <% if (r.id === result.id) continue; %>
+        <a href="/result/<%= r.id %>">
+            <img src="<%= r.image_url %>" alt="<%= result.Concept.prompt %>" class="w-full" />
+        </a>
+        <% } %>
+    </div>
+</div>
+
+
+<%- include("partials/_footer") %>
