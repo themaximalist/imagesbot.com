@@ -34,7 +34,7 @@
         <% let off = (page - 1) * limit %>
         <% let qs = `?offset=${off}&limit=${limit}`; %>
         <% if (search) { qs += `&search=${encodeURIComponent(search)}`; } %>
-        <a href="/gallery?<%= qs %>" class="<%= (offset == off ? "font-bold bg-gray-200 hover:bg-gray-300" : "bg-gray-50 hover:bg-gray-100") %> px-3 py-2 rounded-sm text-sm">
+        <a href="/gallery<%= qs %>" class="<%= (offset == off ? "font-bold bg-gray-200 hover:bg-gray-300" : "bg-gray-50 hover:bg-gray-100") %> px-3 py-2 rounded-sm text-sm">
             <%= page %>
         </a>
         <% } %>
