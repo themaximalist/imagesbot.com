@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_NAME="imagesbot.com"
+APP_NAME="aiimageexplorer.com"
 
 # Check if the first argument is "--deploy"
 if [[ $1 == "--deploy" ]]; then
