@@ -1,9 +1,9 @@
-const AI = require("@themaximalist/ai.js");
-
 const { Concept, Result } = require("../models");
 const { saveBufferToImage } = require("../utils");
 
 module.exports = async function CreateImage(concept_id, result_id) {
+    const AI = (await import("@themaximalist/ai.js")).default;
+
     try {
         if (!concept_id) throw new Error('No concept_id provided');
         if (!result_id) throw new Error('No result_id provided'); // we pre-define this so we know where to update
@@ -12,17 +12,18 @@ module.exports = async function CreateImage(concept_id, result_id) {
         if (!concept) throw new Error('No concept found');
 
         const options = {
-            service: "stability",
-            model: "stable-diffusion-xl-beta-v2-2-2",
+            service: "replicate",
+            model: "black-forest-labs/flux-schnell",
             style_preset: concept.style,
-            seed: 55555,
+            // seed: 55555,
         };
 
-        const buffer = await AI.Image(concept.prompt, options)
+        const buffer = await AI.Imagine(concept.prompt, options)
+        options.model = "black-forest-labs/flux-schnell"; // bug
         const image_url = await saveBufferToImage(buffer);
         const thumbnail_url = await saveBufferToImage(buffer, 200);
 
-        const result = await Result.create({
+        const result_data = {
             id: result_id,
             SearchId: concept.SearchId,
             QueryId: concept.QueryId,
@@ -31,10 +32,12 @@ module.exports = async function CreateImage(concept_id, result_id) {
             model: options.model,
             image_url,
             thumbnail_url,
-            options: {
+            "options": {
                 seed: options.seed
             }
-        });
+        };
+
+        const result = await Result.create(result_data);
         if (!result) throw new Error('No result created');
 
         return result.dataValues;

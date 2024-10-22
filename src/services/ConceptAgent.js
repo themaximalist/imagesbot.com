@@ -1,6 +1,6 @@
-const AI = require("@themaximalist/ai.js");
-
 module.exports = async function ConceptAgent(input) {
+    const AI = (await import("@themaximalist/ai.js")).default;
+
     let input_prompt = "";
     if (typeof input === "string") {
         input_prompt = `\nHere's the INPUT: ${input}`;
@@ -63,14 +63,20 @@ I transform user INPUT into a JSON format using the RULES provided below:
 - Output JSON that can be handled by JSON.parse().
 ${input_prompt}
 
-Here is the output JSON:
+Please now output only the JSON:
 `.trim();
 
     try {
-        const concept = await AI(prompt, { parser: AI.parseJSONFromText });
+        const concept = JSON.parse(await AI(prompt, {
+            parser: AI.parsers.codeBlock("json"),
+            service: process.env.AI_SERVICE,
+            model: process.env.AI_MODEL,
+        }));
+        console.log("CONCEPT", concept);
         if (!concept.style) throw new Error('No style found');
         if (!concept.prompt) throw new Error('No prompt found');
 
+        console.log("CONCEPT", concept);
         return {
             style: concept.style,
             prompt: concept.prompt
