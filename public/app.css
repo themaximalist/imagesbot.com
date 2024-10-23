@@ -598,12 +598,12 @@ video {
   inset: 0px;
 }
 
-.top-4 {
-  top: 1rem;
-}
-
 .bottom-0 {
   bottom: 0px;
+}
+
+.top-4 {
+  top: 1rem;
 }
 
 .order-\[-1\] {
@@ -618,6 +618,10 @@ video {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.-mb-12 {
+  margin-bottom: -3rem;
 }
 
 .mb-4 {
@@ -646,14 +650,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.-mb-8 {
-  margin-bottom: -2rem;
-}
-
-.-mb-12 {
-  margin-bottom: -3rem;
 }
 
 .line-clamp-2 {
@@ -956,16 +952,16 @@ video {
   padding: 0.75rem;
 }
 
+.p-4 {
+  padding: 1rem;
+}
+
 .p-6 {
   padding: 1.5rem;
 }
 
 .p-8 {
   padding: 2rem;
-}
-
-.p-4 {
-  padding: 1rem;
 }
 
 .px-3 {
@@ -1025,6 +1021,11 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .font-bold {
