@@ -1,27 +1,35 @@
 <%- include("partials/_header") %>
-<div class="h-screen flex flex-col justify-center items-center gap-4 from-white to-gray-100 bg-gradient-to-br">
-    <div class="grow"></div>
-    <%- include("partials/_logo_header", { title: "Generate AI Images", large: true }) %>
-
-    <form class="flex flex-col items-center w-full" method="post" action="/search" id="search-form">
-        <input id="search" type="text" name="query" autofocus="true" data-1p-ignore placeholder="<%- placeholder %>" class="shadow-inner text-center w-full max-w-sm p-2 bg-white outline-gray-400 rounded-xl outline-1" />
-    </form>
-    <div class="relative w-full">
-        <div class="flex gap-4 py-12 overflow-x-scroll w-full max-w-full scrolling-x-content" id="recent-results">
+<div class="h-screen flex flex-col justify-center items-center gap-4 from-white to-gray-100 bg-gradient-to-br relative">
+    <!-- Background image grid -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-2">
             <% recent.forEach(result => { %>
-            <a href="/results/<%- result.Concept.Query.id %>" class="max-w-[100px] lg:max-w-[200px] flex flex-col bg-gray-50 rounded-md shadow-sm hover:scale-110 cursor-pointer transition-all">
-                <img src="<%= result.thumbnail_url %>" class="w-full h-full aspect-square rounded-t-md" />
-                <span class="text-xs lg:text-base truncate p-2">
-                    <%= result.Concept.prompt %>
-                </span>
+            <a href="/result/<%= result.uuid %>" class="aspect-square group overflow-hidden">
+                <img src="<%= result.thumbnail_url %>" 
+                    class="w-full h-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:opacity-100 opacity-40" 
+                    loading="lazy" 
+                    alt="" />
             </a>
             <% }) %>
         </div>
     </div>
+
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black/50"></div>
+
+    <!-- Content -->
     <div class="grow"></div>
-    <div class="flex gap-4 p-4">
-        <a href="/gallery">Gallery</a>
+    <div class="relative bg-white/95 backdrop-blur-sm rounded-lg p-8 shadow-2xl max-w-2xl w-11/12 flex flex-col items-center gap-6 py-12">
+        <%- include("partials/_logo_header", { title: "Generate AI Images", large: true }) %>
+
+        <form class="flex flex-col items-center w-full" method="post" action="/search" id="search-form">
+            <input id="search" type="text" name="query" autofocus="true" data-1p-ignore 
+                placeholder="<%- placeholder %>" 
+                class="shadow-inner text-center w-full max-w-sm p-2 bg-white outline-gray-400 rounded-xl outline-1" />
+        </form>
     </div>
+    <div class="grow"></div>
+
     <script>
         const form = document.getElementById("search-form");
         const query = document.getElementById("search");
