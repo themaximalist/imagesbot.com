@@ -1,10 +1,10 @@
 <%- include("partials/_header") %>
 <div class="h-screen flex flex-col justify-center items-center gap-4 from-white to-gray-100 bg-gradient-to-br relative">
     <!-- Background image grid -->
-    <div class="absolute inset-0 overflow-hidden">
-        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-2">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-2 pointer-events-auto">
             <% recent.forEach(result => { %>
-            <a href="/result/<%= result.uuid %>" class="aspect-square group overflow-hidden">
+            <a href="/result/<%= result.id %>" class="aspect-square group overflow-hidden">
                 <img src="<%= result.thumbnail_url %>" 
                     class="w-full h-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:opacity-100 opacity-40" 
                     loading="lazy" 
@@ -15,10 +15,10 @@
     </div>
 
     <!-- Dark overlay -->
-    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="absolute inset-0 bg-black/50 pointer-events-none"></div>
 
     <!-- Content -->
-    <div class="grow"></div>
+    <div class="grow pointer-events-none"></div>
     <div class="relative bg-white/95 backdrop-blur-sm rounded-lg p-8 shadow-2xl max-w-2xl w-11/12 flex flex-col items-center gap-6 py-12">
         <%- include("partials/_logo_header", { title: "Generate AI Images", large: true }) %>
 
@@ -27,6 +27,8 @@
                 placeholder="<%- placeholder %>" 
                 class="shadow-inner text-center w-full max-w-sm p-2 bg-white outline-gray-400 rounded-xl outline-1" />
         </form>
+
+        <a href="/gallery" class="text-sm text-white absolute bottom-0 -mb-12 text-shadow-sm p-4">Stock Images</a>
     </div>
     <div class="grow"></div>
 
