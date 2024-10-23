@@ -10,4 +10,5 @@ module.exports = function setup(app) {
     app.post("/unfavorite/:result_id/", require("./unfavorite"));
     app.get("/status", require("./status"));
     app.get("/gallery", require("./gallery"));
+    app.get("/sitemap.xml", require("./sitemap")); // Add this line
 };
