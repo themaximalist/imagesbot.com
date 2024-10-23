@@ -1,13 +1,8 @@
 <%- include("partials/_header") %>
 <div class="h-screen flex flex-col justify-center items-center gap-4 from-white to-gray-100 bg-gradient-to-br">
     <div class="grow"></div>
-    <div class="flex flex-col gap-2 items-center">
-        <img src="/imagesbot.png" alt="AI Image Explorer" class="w-28" />
-        <h1 class="text-5xl font-medium tracking-wide">
-            AI <span class="text-gray-700">Image</span> <span class="text-gray-500">Explorer</span>
-        </h1>
-        <h2 class="text-xl text-gray-700">Search and fine-tune AI generated images</h2>
-    </div>
+    <%- include("partials/_logo_header", { title: "Generate AI Images", large: true }) %>
+
     <form class="flex flex-col items-center w-full" method="post" action="/search" id="search-form">
         <input id="search" type="text" name="query" autofocus="true" data-1p-ignore placeholder="<%- placeholder %>" class="shadow-inner text-center w-full max-w-sm p-2 bg-white outline-gray-400 rounded-xl outline-1" />
     </form>

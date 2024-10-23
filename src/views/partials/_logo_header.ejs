@@ -1,0 +1,27 @@
+
+<% if (locals.large) { %>
+<a href="/" class="flex flex-col items-center gap-1">
+    <img src="/logo.png" alt="AI Image Explorer" class="w-28" />
+    <div class="font-medium tracking-wide text-4xl mt-4">
+        AI <span class="text-gray-700">Image</span> <span class="text-gray-500">Explorer</span>
+    </div>
+    <h1 class="text-xl text-gray-500"><%= locals.title %></h1>
+</a>
+<% } else if (locals.small) { %>
+<div class="flex flex-row items-center gap-2">
+    <a href="/" class="font-medium tracking-wide text-xl flex flex-row items-center gap-2">
+        <img src="/logo.png" alt="AI Image Explorer" class="w-6" />
+        AI <span class="text-gray-700">Image</span> <span class="text-gray-500">Explorer</span>
+    </a>
+    /
+    <h1 class="text-lg text-gray-500"><%= locals.title %></h1>
+</div>
+<% } else { %>
+<a href="/" class="flex flex-col items-center">
+    <img src="/logo.png" alt="AI Image Explorer" class="w-16" />
+    <div class="font-medium tracking-wide text-2xl mt-2">
+        AI <span class="text-gray-700">Image</span> <span class="text-gray-500">Explorer</span>
+    </div>
+    <h1 class="text-xl text-gray-500 mt-1"><%= locals.title %></h1>
+</a>
+<% } %>

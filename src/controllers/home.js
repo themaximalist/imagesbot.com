@@ -27,5 +27,7 @@ const suggested = [
 module.exports = async function (req, res) {
     const placeholder = randomElement(suggested);
     const recent = await RecentResults();
-    res.render("home", { placeholder, recent });
+    const title = "AI Image Generator — AI Image Explorer"
+    const description = "Generate AI images and fine-tune them to your liking."
+    res.render("home", { placeholder, recent, title, description });
 }
