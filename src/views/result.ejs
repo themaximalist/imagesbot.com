@@ -1,5 +1,5 @@
-<% const title = `${result.Concept.Query.query.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')}` %>
-<% const description = `Image search results for '${result.Concept.Query.query}'` %>
+<% const title = `${result.Concept.Query.query.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')} Stock Image` %>
+<% const description = `Stock image for '${result.Concept.Query.query}'` %>
 <%- include('partials/_header', { title, description }) %>
 
 <div class="flex flex-col items-center my-4">
