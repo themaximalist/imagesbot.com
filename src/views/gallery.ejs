@@ -1,5 +1,6 @@
-<% const title = "AI Image Gallery" %>
-<%- include("partials/_header", { title: `${title} — AI Image Explorer`, description: "AI stock image gallery, search and generate anything!"}) %>
+<% const title = (locals.search ? `${locals.search.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')} AI Stock Images` : "AI Image Gallery") %>
+<% const description = (locals.search ? `Search and generate ${locals.search} AI stock images` : "AI stock image gallery, search and generate anything!") %>
+<%- include("partials/_header", { title: `${title} — AI Image Explorer`, description }) %>
 
 <div class="flex flex-col items-center my-4">
     <%- include("partials/_logo_header", { title, small: true }) %>
